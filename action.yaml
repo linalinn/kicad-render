@@ -16,7 +16,7 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: 'ghcr.io/linalinn/kicad-render:nightly'
+  image: 'docker://ghcr.io/linalinn/kicad-render:nightly'
   args:
     - if [ -n "$INPUT_ANIMATION") ]; then render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b INPUT_BACKGROUND -a $INPUT_ANIMATION else render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b INPUT_BACKGROUND if
 
