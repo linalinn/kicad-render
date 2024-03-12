@@ -1,0 +1,22 @@
+# action.yml
+name: 'kicad render pcb'
+description: 'Render KiCad PCBs top, bottom optionally render and gif or mp4 of the PCB rotating'
+inputs:
+  pcb_file:  # id of input
+    description: 'Path to your .kicad_pcb'
+    required: true
+  output_path:
+    description: 'path to where top.png and bottom.png should be created'
+    required: true
+  backgroud:
+    description: 'Image background. Options: transparent, opaque. Default: transparent for PNG, opaque for JPEG'
+    required: false
+  animation:
+    description: 'If an animation of the PCB rotating should be rendered (backgroud dose not apply)'
+    required: false
+runs:
+  using: 'docker'
+  image: 'ghcr.io/linalinn/kicad-render:nightly'
+  args:
+    - if [ -n "$INPUT_ANIMATION") ]; then render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b INPUT_BACKGROUND -a $INPUT_ANIMATION else render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b INPUT_BACKGROUND if
+
