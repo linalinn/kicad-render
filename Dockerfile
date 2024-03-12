@@ -9,4 +9,6 @@ ARG VERSION=no-version
 
 ENV VERSION=$VERSION
 
-COPY --chmod=a+rx *.sh /usr/bin/
+COPY *.sh /usr/bin/
+
+RUN sudo chmod a+rx /usr/bin/render-pcb.sh && sudo chmod a+rx /usr/bin/kicad_animation.sh
