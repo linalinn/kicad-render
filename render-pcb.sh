@@ -28,7 +28,7 @@ do
         h) help;;
         v) echo "IMAGE version: ${VERSION:-none}" && exit;;
         \?)
-            echo "Error: Invalid option"
+            echo "Error: -${OPTARG} is invalid option"
             exit;
     esac
 done
