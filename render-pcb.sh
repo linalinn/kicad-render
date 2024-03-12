@@ -51,10 +51,9 @@ echo $output_path
 
 mkdir -p $output_path
 echo "rendering top"
-$KICAD_CLI pcb render --side top --background $background -o $output_path/top.png $kicad_pcb > /dev/null
-
+$KICAD_CLI pcb render --side top --background $background -o $output_path/top.png $kicad_pcb
 echo "rendering bottom"
-$KICAD_CLI pcb render --side bottom --background $background -o $output_path/bottom.png $kicad_pcb > /dev/null
+$KICAD_CLI pcb render --side bottom --background $background -o $output_path/bottom.png $kicad_pcb
 
 if [[ -n "$animation" ]]; then
     echo "rendering animation"
