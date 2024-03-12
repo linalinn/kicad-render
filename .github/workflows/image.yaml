@@ -29,4 +29,4 @@ jobs:
           push: true
           build-args: |
             "VERSION=${{ github.sha }}"
-          tags: ghcr.io/linalinn/kicad:nightly
+          tags: ghcr.io/linalinn/kicad-render:nightly
