@@ -11,8 +11,9 @@ inputs:
   backgroud:
     description: 'Image background. Options: transparent, opaque. Default: transparent for PNG, opaque for JPEG'
     required: false
+    default: 'transparent'
   animation:
-    description: 'If an animation of the PCB rotating should be rendered (backgroud dose not apply)'
+    description: 'If an animation of the PCB rotating should be rendered (mp4 or gif) (backgroud dose not apply)'
     required: false
 runs:
   using: 'docker'
