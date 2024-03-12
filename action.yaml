@@ -20,5 +20,5 @@ runs:
   args:
     - bash
     - -c 
-    - 'if [ -n "$INPUT_ANIMATION" ]; then render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b $INPUT_BACKGROUND -a $INPUT_ANIMATION; else render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b $INPUT_BACKGROUND; fi'
+    - if [ -n "$INPUT_ANIMATION" ]; then render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b $INPUT_BACKGROUND -a $INPUT_ANIMATION; else render-pcb.sh -f $INPUT_PCB_FILE -o $INPUT_OUTPUT_PATH -b $INPUT_BACKGROUND; fi
 
