@@ -18,7 +18,7 @@ help() {
 output_path="/pwd"
 background="transparent"
 
-while getopts :f:o:a:hv option
+while getopts :f:o:a:b:hv option
 do
     case "${option}" in
         f) kicad_pcb=${OPTARG};;
