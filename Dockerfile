@@ -9,4 +9,4 @@ ARG VERSION=no-version
 
 ENV VERSION=$VERSION
 
-COPY *.sh /usr/bin/
+COPY --chmod=a+rx *.sh /usr/bin/
