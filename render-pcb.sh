@@ -47,17 +47,17 @@ fi
 
 KICAD_CLI=$(which kicad-cli || which kicad-cli-nightly)
 
-echo $output_path
+echo "$output_path"
 
-mkdir -p $output_path
+mkdir -p "$output_path"
 echo "rendering top"
-$KICAD_CLI pcb render --side top --background $background -o $output_path/top.png $kicad_pcb
+$KICAD_CLI pcb render --side top --background $background -o "$output_path/top.png" "$kicad_pcb"
 echo "rendering bottom"
-$KICAD_CLI pcb render --side bottom --background $background -o $output_path/bottom.png $kicad_pcb
+$KICAD_CLI pcb render --side bottom --background $background -o "$output_path/bottom.png" "$kicad_pcb"
 
 if [[ -n "$animation" ]]; then
     echo "rendering animation"
-    kicad_animation.sh $animation $kicad_pcb $output_path
+    kicad_animation.sh $animation "$kicad_pcb" "$output_path"
 fi
 
-ls $output_path
+ls "$output_path"
