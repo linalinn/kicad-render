@@ -71,6 +71,13 @@ Also this is using kicad nightly since there is yet no kicad relase containing t
     ![top](<github_username>.github.io/<repo_name>/images/top.png)
     ![bottom](<github_username>.github.io/<repo_name>/images/bottom.png)
     ```
+
+6. Prepare the repo  
+   - Open your repo on github
+   - Open `Setting`
+   - (Left side) click on `Pages`
+   - Under `Build and deployment` select for `Source` `Github Action` from the dropdown.
+
 5. git commit and push
 
 ## Animation original code
