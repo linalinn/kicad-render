@@ -15,7 +15,7 @@ Also this is using kicad nightly since there is yet no kicad relase containing t
 
 2. Add an new yaml in that dirctory e.g. pcb_image.yaml
 
-3. Adding the configuration (you may need to replace `'refs/heads/main'` with `'refs/heads/master'` on older repos)
+3. Adding the configuration. Set the path to your .kicad_pcb file (you may need to replace `'refs/heads/main'` with `'refs/heads/master'` on older repos)
     ```yaml
     name: pcb_image
     on:
@@ -31,7 +31,7 @@ Also this is using kicad nightly since there is yet no kicad relase containing t
             - name: render pcb image
                 uses: linalinn/kicad-render@main
                 with:
-                pcb_file: m2sdr.kicad_pcb
+                pcb_file: <path from repo root to .kicad_pcb>
                 output_path: ${{ github.workspace }}/images
                 
             - name: Setup Pages
@@ -79,6 +79,9 @@ Also this is using kicad nightly since there is yet no kicad relase containing t
    - Under `Build and deployment` select for `Source` `Github Action` from the dropdown.
 
 5. git commit and push
+
+### Example
+You can find a example [here in the m2sdr](https://github.com/HackModsOrg/m2sdr) and the workflow for it [here](https://github.com/HackModsOrg/m2sdr/blob/master/.github/workflows/images.yaml)
 
 ## Animation original code
 The [code](https://gist.github.com/arturo182/57ab066e6a4a36ee22979063e4d5cce1) for the Animation is from [arturo182](https://github.com/arturo182)  
