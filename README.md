@@ -68,8 +68,8 @@ Also this is using kicad nightly since there is yet no kicad relase containing t
     # My first pcb with automaitc image generation
 
     ### Images
-    ![top](<github_username>.github.io/<repo_name>/images/top.png)
-    ![bottom](<github_username>.github.io/<repo_name>/images/bottom.png)
+    ![top](<github_username>.github.io/<repo_name>/top.png)
+    ![bottom](<github_username>.github.io/<repo_name>/bottom.png)
     ```
 
 6. Prepare the repo  
