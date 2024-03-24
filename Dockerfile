@@ -14,3 +14,5 @@ COPY *.sh /usr/bin/
 RUN sudo chmod a+rx /usr/bin/render-pcb.sh && sudo chmod a+rx /usr/bin/kicad_animation.sh
 
 USER root
+
+WORKDIR /pwd
