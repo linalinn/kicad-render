@@ -1,19 +1,20 @@
-# kicad render action (WIP)
+# kicad render action
 
-This actions allows you to automaticly render Images of your pcb and use it e.g. in a README.md
+This action allows you to automatically render Images of your PCB and use them e.g. in a README.md
 
 ### current state
-Rendering Image and Animations is working but the 3D models for kicad are missing since the offical docker image dose not contain the config that is created at first start up.
+~~Rendering Image and Animations is working but the 3D models for Kicad are missing since the official docker image does not contain the config that was created at the first start-up.~~
+3D Models provided by Kicad are now also rendered.
 
-Even animation are renderd fine I wasn't able to embed them in to a README.md
+Even animations are rendered fine I wasn't able to embed them into a README.md
 
-Also this is using kicad nightly since there is yet no kicad relase containing the image rendering comand in the cli.
+Also, this is using Kicad nightly since there is yet no Kicad release containing the image rendering command in the CLI.
 
 
 ## Usage
-1. Create the dirctory `.github/workflows` if it dose not already exists.
+1. Create the directory `.github/workflows` if it does not already exist.
 
-2. Add an new yaml in that dirctory e.g. pcb_image.yaml
+2. Add a new yaml in that directory e.g. pcb_image.yaml
 
 3. Adding the configuration. Set the path to your .kicad_pcb file (you may need to replace `'refs/heads/main'` with `'refs/heads/master'` on older repos)
     ```yaml
@@ -65,7 +66,7 @@ Also this is using kicad nightly since there is yet no kicad relase containing t
 
 4. Adding the images to an README.md
     ```Markdown
-    # My first pcb with automaitc image generation
+    # My first PCB with automatic image generation
 
     ### Images
     ![top](<github_username>.github.io/<repo_name>/top.png)
@@ -73,9 +74,9 @@ Also this is using kicad nightly since there is yet no kicad relase containing t
     ```
 
 6. Prepare the repo  
-   - Open your repo on github
+   - Open your repo on GitHub
    - Open `Setting`
-   - (Left side) click on `Pages`
+   - (Left side) Click on `Pages`
    - Under `Build and deployment` select for `Source` `Github Action` from the dropdown.
 
 5. git commit and push
