@@ -1,6 +1,9 @@
-name: build docker image
+name: build kicad-render image
 on:
   push:
+    paths:
+    - Dockerfile
+    - '*.sh'
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
