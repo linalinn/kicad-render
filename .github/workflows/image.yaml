@@ -20,9 +20,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d-%h-%M')"
+        run:  echo "date=$(date +'%Y-%m-%d-%h-%M')" >> $GITHUB_OUTPUT
       - name: Build and push Docker image dev
         if: github.ref_name == 'dev'
         uses: docker/build-push-action@v5
