@@ -21,7 +21,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build and push Docker image dev
+        if: github.ref_name == 'dev'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          build-args: |
+            "VERSION=${{ github.sha }}-dev"
+          tags: ghcr.io/linalinn/kicad-render:dev
+
       - name: Build and push Docker image
+        if: github.ref_name == github.event.repository.default_branch
         uses: docker/build-push-action@v5
         with:
           context: .
