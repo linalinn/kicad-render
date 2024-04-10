@@ -1,14 +1,11 @@
 # kicad render action
+[![KiCad render  - for gitlab ](https://img.shields.io/badge/KiCad_render_-for_gitlab_-2ea44f?style=for-the-badge&logo=gitlab)](https://gitlab.com/linalinn/kicad-render)
 
 This action allows you to automatically render Images of your PCB and use them e.g. in a README.md
 
 ### current state
-~~Rendering Image and Animations is working but the 3D models for Kicad are missing since the official docker image does not contain the config that was created at the first start-up.~~
-3D Models provided by Kicad are now also rendered.
 
-Even animations are rendered fine I wasn't able to embed them into a README.md
-
-Also, this is using Kicad nightly since there is yet no Kicad release containing the image rendering command in the CLI.
+This is using Kicad nightly since there is yet no Kicad release containing the image rendering command in the CLI.
 
 
 ## Usage
