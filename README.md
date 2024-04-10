@@ -17,48 +17,48 @@ This is using Kicad nightly since there is yet no Kicad release containing the i
     ```yaml
     name: pcb_image
     on:
-        push:
+      push:
     jobs:
-        render-image:
-            name: render-image
-            runs-on: ubuntu-latest
-            steps:
-            - name: Check out the repo
-                uses: actions/checkout@v4
+      render-image:
+        name: render-image
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v4
 
-            - name: render pcb image
-                uses: linalinn/kicad-render@main
-                with:
-                pcb_file: <path from repo root to .kicad_pcb>
-                output_path: ${{ github.workspace }}/images
-                
-            - name: Setup Pages
-                if: github.ref == 'refs/heads/main'
-                uses: actions/configure-pages@v3
-
-            - name: Upload Artifact
-                if: github.ref == 'refs/heads/main'
-                uses: actions/upload-pages-artifact@v1
-                with:
-                path: "images"
-
-        deploy-pages:
-            if: github.ref == 'refs/heads/main'
-            runs-on: ubuntu-latest
-            needs: render-image
+          - name: render pcb image
+            uses: linalinn/kicad-render@main
+            with:
+            pcb_file: <path from repo root to .kicad_pcb>
+            output_path: ${{ github.workspace }}/images
             
-            permissions:
-            pages: write
-            id-token: write
+          - name: Setup Pages
+            if: github.ref == 'refs/heads/main'
+            uses: actions/configure-pages@v3
 
-            environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
+          - name: Upload Artifact
+            if: github.ref == 'refs/heads/main'
+            uses: actions/upload-pages-artifact@v1
+            with:
+            path: "images"
 
-            steps:
-            - name: Deploy to GitHub Pages
-                id: deployment
-                uses: actions/deploy-pages@v2
+      deploy-pages:
+        if: github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest
+        needs: render-image
+          
+        permissions:
+          pages: write
+          id-token: write
+
+        environment:
+          name: github-pages
+          url: ${{ steps.deployment.outputs.page_url }}
+
+        steps:
+          - name: Deploy to GitHub Pages
+            id: deployment
+            uses: actions/deploy-pages@v2
     ```
 
 4. Adding the images to an README.md
