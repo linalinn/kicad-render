@@ -25,13 +25,14 @@ extract_output_path() {
 
 background="transparent"
 
-while getopts :f:o:a:b:hv option
+while getopts :f:o:a:b:z:hv option
 do
     case "${option}" in
         f) kicad_pcb=${OPTARG};;
         o) output_path=${OPTARG};;
         a) animation=${OPTARG};;
         b) background=${OPTARG};;
+        b) zoom=${OPTARG};;
         h) help;;
         v) echo "IMAGE version: ${VERSION:-none}" && exit;;
         \?)
@@ -68,9 +69,9 @@ echo "$output_path"
 mkdir -p "$output_path"
 
 echo "rendering top"
-$KICAD_CLI pcb render --side top --background $background -o "$output_top" "$kicad_pcb"
+$KICAD_CLI pcb render --side top --background $background --zoom $zoom -o "$output_top" "$kicad_pcb"
 echo "rendering bottom"
-$KICAD_CLI pcb render --side bottom --background $background -o "$output_bottom" "$kicad_pcb"
+$KICAD_CLI pcb render --side bottom --background $background --zoom $zoom -o "$output_bottom" "$kicad_pcb"
 
 if [[ -n "$animation" ]]; then
     echo "rendering animation"
