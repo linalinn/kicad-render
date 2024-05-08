@@ -32,7 +32,7 @@ do
         o) output_path=${OPTARG};;
         a) animation=${OPTARG};;
         b) background=${OPTARG};;
-        b) zoom=${OPTARG};;
+        z) zoom=${OPTARG};;
         h) help;;
         v) echo "IMAGE version: ${VERSION:-none}" && exit;;
         \?)
