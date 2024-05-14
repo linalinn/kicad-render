@@ -7,6 +7,7 @@ This action allows you to automatically render Images of your PCB and use them e
 
 This is using Kicad nightly since there is yet no Kicad release containing the image rendering command in the CLI.
 
+[[ __]]
 
 ## Usage
 1. Create the directory `.github/workflows` if it does not already exist.
@@ -84,3 +85,7 @@ You can find a example [here in the m2sdr](https://github.com/HackModsOrg/m2sdr)
 ## Animation original code
 The [code](https://gist.github.com/arturo182/57ab066e6a4a36ee22979063e4d5cce1) for the Animation is from [arturo182](https://github.com/arturo182)  
 [Mastdon post with Gif and link to gist](https://mastodon.social/@arturo182/112062074668232493)
+
+
+## Development
+In this repo, you find an `.devcontainer` folder. This is for making Development and testing easier by not having to install kicad-nightly on your system. Dev containers are supported by Visual Studio Code, JetBrains, and Github. Alternatively, you can run the following docker command in the repository root `docker run -v "$(pwd)":/pwd --workdir=/pwd --rm -it ghcr.io/linalinn/kicad:nightly-2024-04-09-13-16 bash` and run kicad nightly from inside this container.
