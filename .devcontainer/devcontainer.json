@@ -7,15 +7,16 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {},
-		"ghcr.io/lukewiwa/features/shellcheck:0": {}
-	}
+		"ghcr.io/lukewiwa/features/shellcheck:0": {},
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
 
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+    "postCreateCommand": "apt-get install --yes openssh-client"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
