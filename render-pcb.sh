@@ -9,6 +9,7 @@ help() {
     echo "b     Image background. Options: transparent, opaque. Default: transparent for PNG, opaque for JPEG"
     echo "o     Directory where the images and optinally the animation should be written to."
     echo "a     Render animation and select animation output format (mp4 or gif)."
+    echo "z     Camera zoom default 1"
     echo "v     Print protgram version"
     echo "h     Print this Help."
     echo
@@ -25,13 +26,14 @@ extract_output_path() {
 
 background="transparent"
 
-while getopts :f:o:a:b:hv option
+while getopts :f:o:a:b:z:hv option
 do
     case "${option}" in
         f) kicad_pcb=${OPTARG};;
         o) output_path=${OPTARG};;
         a) animation=${OPTARG};;
         b) background=${OPTARG};;
+        z) zoom=${OPTARG};;
         h) help;;
         v) echo "IMAGE version: ${VERSION:-none}" && exit;;
         \?)
@@ -67,10 +69,16 @@ echo "$output_path"
 
 mkdir -p "$output_path"
 
+KICAD_CLI_OPTIONAL_ARGS=""
+
+if [[ -n "$zoom" ]]; then
+    KICAD_CLI_OPTIONAL_ARGS="$KICAD_CLI_OPTIONAL_ARGS --zoom $zoom"
+fi
+
 echo "rendering top"
-$KICAD_CLI pcb render --side top --background $background -o "$output_top" "$kicad_pcb"
+$KICAD_CLI pcb render --side top --background $background -o "$output_top" "$kicad_pcb" $KICAD_CLI_OPTIONAL_ARGS
 echo "rendering bottom"
-$KICAD_CLI pcb render --side bottom --background $background -o "$output_bottom" "$kicad_pcb"
+$KICAD_CLI pcb render --side bottom --background $background -o "$output_bottom" "$kicad_pcb" $KICAD_CLI_OPTIONAL_ARGS
 
 if [[ -n "$animation" ]]; then
     echo "rendering animation"
