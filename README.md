@@ -28,8 +28,8 @@ This is using Kicad nightly since there is yet no Kicad release containing the i
           - name: render pcb image
             uses: linalinn/kicad-render@main
             with:
-            pcb_file: <path from repo root to .kicad_pcb>
-            output_path: ${{ github.workspace }}/images
+              pcb_file: <path from repo root to .kicad_pcb>
+              output_path: ${{ github.workspace }}/images
             
           - name: Setup Pages
             if: github.ref == 'refs/heads/main'
@@ -39,7 +39,7 @@ This is using Kicad nightly since there is yet no Kicad release containing the i
             if: github.ref == 'refs/heads/main'
             uses: actions/upload-pages-artifact@v1
             with:
-            path: "images"
+              path: "images"
 
       deploy-pages:
         if: github.ref == 'refs/heads/main'
@@ -76,6 +76,25 @@ This is using Kicad nightly since there is yet no Kicad release containing the i
    - Under `Build and deployment` select for `Source` `Github Action` from the dropdown.
 
 5. git commit and push
+
+### Rendering Animations
+This Action can also render an Animation of you pcb rotating as gif or mp4 is can be enabled by adding `animation: gif` or `animation: mp4` 
+
+```yaml
+- name: render pcb image
+  uses: linalinn/kicad-render@main
+  with:
+    pcb_file: <path from repo root to .kicad_pcb>
+    output_path: ${{ github.workspace }}/images
+    animation: gif
+```
+
+To display the animation in a `README.md` add the following to you README.md.  
+**Note:** GitHubs CDN has a file size limit this is why the animation can't be bigger then **300x300px** 
+
+```Markdown
+![animation](<github_username>.github.io/<repo_name>/rotating.gif)
+```
 
 ### Example
 You can find a example [here in the m2sdr](https://github.com/HackModsOrg/m2sdr) and the workflow for it [here](https://github.com/HackModsOrg/m2sdr/blob/master/.github/workflows/images.yaml)
