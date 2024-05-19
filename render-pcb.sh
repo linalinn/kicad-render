@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 help() {
     echo "Convert .kicad_pcb file to front and back image and optionaly render an animation"
     echo
