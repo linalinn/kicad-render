@@ -16,13 +16,13 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
       - name: simple render
-        run: bash ${GITHUB_WORKSPACE}/render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" && test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/test_top.png"
+        run: bash PATH="${GITHUB_WORKSPACE}:$PATH" render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" && test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/test_top.png"
       - name: simple render with output path
-        run: bash ${GITHUB_WORKSPACE}/render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" && test -s "${GITHUB_WORKSPACE}/images/top.png"
+        run: bash PATH="${GITHUB_WORKSPACE}:$PATH" render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" && test -s "${GITHUB_WORKSPACE}/images/top.png"
       - name: simple render with zoom
-        run: bash ${GITHUB_WORKSPACE}/render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" -z "0.5" && test -s "${GITHUB_WORKSPACE}/images/top.png"
+        run: bash PATH="${GITHUB_WORKSPACE}:$PATH" render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" -z "0.5" && test -s "${GITHUB_WORKSPACE}/images/top.png"
       - name: render with animation
-        run:  bash ${GITHUB_WORKSPACE}/render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb"  -o "${GITHUB_WORKSPACE}/images" -a "gif" && test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
+        run:  bash PATH="${GITHUB_WORKSPACE}:$PATH" render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb"  -o "${GITHUB_WORKSPACE}/images" -a "gif" && test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
 
 
   push_to_registry:
