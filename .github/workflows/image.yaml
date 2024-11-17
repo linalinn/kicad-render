@@ -16,7 +16,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
       - name: simple render
-        run: PATH="${GITHUB_WORKSPACE}:$PATH" bash  render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" && test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/test_top.png"
+        run: PATH="${GITHUB_WORKSPACE}:$PATH" bash render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" && test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/test_top.png"
       - name: simple render with output path
         run: PATH="${GITHUB_WORKSPACE}:$PATH" bash render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" && test -s "${GITHUB_WORKSPACE}/images/top.png"
       - name: simple render with zoom
@@ -48,7 +48,7 @@ jobs:
         id: date
         run:  echo "date=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_OUTPUT
       - name: Build and push Docker image dev
-        if: github.ref_name == 'dev'
+        if: github.ref_name != github.event.repository.default_branch
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -56,7 +56,7 @@ jobs:
           push: true
           build-args: |
             "VERSION=${{ github.sha }}-dev"
-          tags: "ghcr.io/linalinn/kicad-render:dev,ghcr.io/linalinn/kicad-render:dev-${{ steps.date.outputs.date }}"
+          tags: "ghcr.io/linalinn/kicad-render:dev,ghcr.io/linalinn/kicad-render:${{ github.event.repository.default_branch }}"
 
       - name: Build and push Docker image
         if: github.ref_name == github.event.repository.default_branch
