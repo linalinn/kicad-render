@@ -56,7 +56,7 @@ jobs:
           push: true
           build-args: |
             "VERSION=${{ github.sha }}-dev"
-          tags: "ghcr.io/linalinn/kicad-render:dev,ghcr.io/linalinn/kicad-render:${{ github.event.repository.default_branch }}"
+          tags: "ghcr.io/linalinn/kicad-render:${{ github.ref_name }}"
 
       - name: Build and push Docker image
         if: github.ref_name == github.event.repository.default_branch
