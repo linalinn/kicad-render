@@ -12,9 +12,9 @@ inputs:
     description: 'Camera zoom, default 1'
     required: false
   background:
-    description: 'Image background. Options: transparent, opaque. Default: transparent for PNG, opaque for JPEG'
+    description: 'Image background. Options: transparent, opaque. Default: opaque for JPEG, transparent for PNG'
     required: false
-    default: 'transparent'
+    default: 'opaque'
   animation:
     description: 'If an animation of the PCB rotating should be rendered (mp4 or gif) (background dose not apply)'
     required: false
