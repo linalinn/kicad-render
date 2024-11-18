@@ -8,8 +8,9 @@ help() {
     echo "Syntax: render-pcb.sh [-f|o|a|h]"
     echo "options:"
     echo "f     Path to .kicad_pcb file"
-    echo "b     Image background. Options: transparent, opaque. Default: transparent for PNG, opaque for JPEG"
+    echo "b     Image background. Options: transparent, opaque. Default: opaque for JPEG, transparent for PNG"
     echo "o     Directory where the images and optinally the animation should be written to."
+    echo "p     Set a prefix for the images diffrent from project name"
     echo "a     Render animation and select animation output format (mp4 or gif)."
     echo "z     Camera zoom default 1"
     echo "v     Print protgram version"
@@ -26,13 +27,14 @@ extract_output_path() {
   echo "$1" | sed -e 's/[^\/]*\.kicad_pcb//g'
 }
 
-background="transparent"
+background="opaque"
 
-while getopts :f:o:a:b:z:hv option
+while getopts :f:o:p:a:b:z:hv option
 do
     case "${option}" in
         f) kicad_pcb=${OPTARG};;
         o) output_path=${OPTARG};;
+        p) filename_prefix=${OPTARG};;
         a) animation=${OPTARG};;
         b) background=${OPTARG};;
         z) zoom=${OPTARG};;
@@ -50,7 +52,8 @@ fi
 
 if [[ -z "$output_path" ]]; then
     path=$(extract_output_path "$2")
-    name=$(extract_project_name "$2")
+    extracted_project_name=$(extract_project_name "$2")
+    name="${filename_prefix:-$extracted_project_name}"
     echo "name: $name"
     echo "path: $path"
     output_path="$path"
@@ -59,9 +62,15 @@ if [[ -z "$output_path" ]]; then
     echo "output_top: $output_top"
     echo "output_bottom: $output_bottom"
 else
-    output_top="$output_path/top.png"
-    output_bottom="$output_path/bottom.png"
-    output_animation="$output_path"
+    if [[ -n "$filename_prefix" ]]; then
+        output_top="$output_path/${filename_prefix}_top.png"
+        output_bottom="$output_path/${filename_prefix}_bottom.png"
+        output_animation="$output_path"
+    else
+        output_top="$output_path/top.png"
+        output_bottom="$output_path/bottom.png"
+        output_animation="$output_path"
+    fi
 fi
 
 

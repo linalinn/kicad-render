@@ -1,4 +1,4 @@
-FROM ghcr.io/linalinn/kicad:nightly-2024-04-09-13-16
+FROM ghcr.io/linalinn/kicad:nightly-2024-11-02
 
 COPY *.sh /usr/bin/
 
