@@ -30,6 +30,7 @@ This is using Kicad nightly since there is yet no Kicad release containing the i
             with:
               pcb_file: <path from repo root to .kicad_pcb>
               output_path: ${{ github.workspace }}/images
+              background: transparent # Remove for no transparency
             
           - name: Setup Pages
             if: github.ref == 'refs/heads/main'
