@@ -19,6 +19,10 @@ jobs:
         run: PATH="${GITHUB_WORKSPACE}:$PATH" bash render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" && test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/test_top.png"
       - name: simple render with output path
         run: PATH="${GITHUB_WORKSPACE}:$PATH" bash render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" && test -s "${GITHUB_WORKSPACE}/images/top.png"
+      - name: simple render with filename prefix
+        run: PATH="${GITHUB_WORKSPACE}:$PATH" bash render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -p fp && test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/fp_top.png"
+      - name: simple render with output path and filename prefix
+        run: PATH="${GITHUB_WORKSPACE}:$PATH" bash render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" -p fp && test -s "${GITHUB_WORKSPACE}/images/fp_top.png"
       - name: simple render with zoom
         run: PATH="${GITHUB_WORKSPACE}:$PATH" bash render-pcb.sh -f "${GITHUB_WORKSPACE}/.github/tests/test pcb/test.kicad_pcb" -o "${GITHUB_WORKSPACE}/images" -z "0.5" && test -s "${GITHUB_WORKSPACE}/images/top.png"
       - name: render with animation
