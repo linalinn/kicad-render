@@ -5,7 +5,7 @@ This action allows you to automatically render Images of your PCB and use them e
 
 ### current state
 
-This is using Kicad nightly since there is yet no Kicad release containing the image rendering command in the CLI.
+This uses Kicad 9.
 
 ## Usage
 1. Create the directory `.github/workflows` if it does not already exist.

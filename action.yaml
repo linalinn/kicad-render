@@ -20,7 +20,7 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/linalinn/kicad-render:nightly-2024-05-19-12-16'
+  image: 'docker://ghcr.io/linalinn/kicad-render:main'
   args:
     - bash
     - -c 
