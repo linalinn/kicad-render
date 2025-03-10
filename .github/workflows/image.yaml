@@ -44,6 +44,7 @@ jobs:
             "VERSION=${{ github.sha }}"
           cache-to: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
           cache-from: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
+          load: true
           tags: "ghcr.io/linalinn/kicad-render:${{ github.ref_name }}"
 
       - name: simple render
