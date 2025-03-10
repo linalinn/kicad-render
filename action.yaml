@@ -18,9 +18,11 @@ inputs:
   animation:
     description: 'If an animation of the PCB rotating should be rendered (mp4 or gif) (background dose not apply)'
     required: false
+  docker_image:
+    default: 'docker://ghcr.io/linalinn/kicad-render:nightly-2024-05-19-12-16'
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/linalinn/kicad-render:nightly-2024-05-19-12-16'
+  image: '${{ inputs.docker_image }}'
   args:
     - bash
     - -c 
