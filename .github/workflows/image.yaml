@@ -48,7 +48,9 @@ jobs:
           tags: "ghcr.io/linalinn/kicad-render:${{ github.ref_name }}"
 
       - name: simple render
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" && test -s "/pwd/.github/tests/test pcb/test_top.png"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" && ls -al "/pwd/.github/tests/test pcb"
+      - name: simple render test file created
+        run: test -s "/pwd/.github/tests/test pcb/test_top.png"
       - name: simple render with output path
         run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" && test -s "/pwd/images/top.png"
       - name: simple render with filename prefix
