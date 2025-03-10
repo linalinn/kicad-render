@@ -42,17 +42,17 @@ jobs:
           tags: "ghcr.io/linalinn/kicad-render:${{ github.ref_name }}"
 
       - name: simple render
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm -it render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" && test -s "/pwd/.github/tests/test pcb/test_top.png"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" && test -s "/pwd/.github/tests/test pcb/test_top.png"
       - name: simple render with output path
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm -it render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" && test -s "/pwd/images/top.png"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" && test -s "/pwd/images/top.png"
       - name: simple render with filename prefix
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm -it render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -p fp && test -s "/pwd/.github/tests/test pcb/fp_top.png"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -p fp && test -s "/pwd/.github/tests/test pcb/fp_top.png"
       - name: simple render with output path and filename prefix
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm -it render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -p fp && test -s "$/pwd/images/fp_top.png"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm  render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -p fp && test -s "$/pwd/images/fp_top.png"
       - name: simple render with zoom
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm -it render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -z "0.5" && test -s "/pwd/images/top.png"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -z "0.5" && test -s "/pwd/images/top.png"
       - name: render with animation
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm -it render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"  -o "/pwd/images" -a "gif" && test -s "/pwd/images/rotating.gif"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"  -o "/pwd/images" -a "gif" && test -s "/pwd/images/rotating.gif"
 
       - name: push docker image dev
         if: github.ref_name != github.event.repository.default_branch
