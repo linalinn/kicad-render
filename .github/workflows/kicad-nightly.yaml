@@ -39,10 +39,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          build-args:
-            - "KICAD_PPA=kicad-dev-nightly"
-            - "KICAD_PACKAGE=kicad-nightly"
-            - "VERSION=${{ github.sha }}"
+          build-args: "KICAD_PPA=kicad-dev-nightly,KICAD_PACKAGE=kicad-nightly,VERSION=${{ github.sha }}"
           cache-to: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
           cache-from: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
           load: true
