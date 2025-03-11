@@ -3,10 +3,6 @@
 
 This action allows you to automatically render Images of your PCB and use them e.g. in a README.md
 
-### current state
-
-This is using Kicad nightly since there is yet no Kicad release containing the image rendering command in the CLI.
-
 ## Usage
 1. Create the directory `.github/workflows` if it does not already exist.
 
@@ -61,13 +57,14 @@ This is using Kicad nightly since there is yet no Kicad release containing the i
             uses: actions/deploy-pages@v2
     ```
 
-4. Adding the images to an README.md
+4. Adding the images to an README.md (feel free to remove the last line)
     ```Markdown
     # My first PCB with automatic image generation
 
     ### Images
     ![top](<github_username>.github.io/<repo_name>/top.png)
     ![bottom](<github_username>.github.io/<repo_name>/bottom.png)
+    rendered with [kicad-render](https://github.com/linalinn/kicad-render)
     ```
 
 6. Prepare the repo  
@@ -106,4 +103,4 @@ The [code](https://gist.github.com/arturo182/57ab066e6a4a36ee22979063e4d5cce1) f
 
 
 ## Development
-In this repo, you find an `.devcontainer` folder. This is for making Development and testing easier by not having to install kicad-nightly on your system. Dev containers are supported by Visual Studio Code, JetBrains, and Github. Alternatively, you can run the following docker command in the repository root `docker run -v "$(pwd)":/pwd --workdir=/pwd --rm -it ghcr.io/linalinn/kicad:nightly-2024-04-09-13-16 bash` and run kicad nightly from inside this container.
+In this repo, you find an `.devcontainer` folder. This is for making Development and testing easier by not having to install kicad-nightly on your system. Dev containers are supported by Visual Studio Code, JetBrains, and Github. Alternatively, you can run the following docker command in the repository root `docker run -v "$(pwd)":/pwd --workdir=/pwd --rm -it ghcr.io/linalinn/kicad:9.0 bash` and run kicad nightly from inside this container.
