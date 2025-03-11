@@ -38,11 +38,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: ./Dockerfile.kicad-nightly
           build-args: |
-            KICAD_PPA=kicad-dev-nightly
-            KICAD_PACKAGE=kicad-nightly
-            VERSION=${{ github.sha }}
+            "VERSION=${{ github.sha }}"
           cache-to: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
           cache-from: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
           load: true
