@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:24.04 as ubuntu-kicad-nightly
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -11,3 +11,11 @@ RUN apt-get update -y && \
     add-apt-repository -y ppa:kicad/kicad-dev-nightly && \
     apt-get install kicad-nightly ffmpeg -y && \ 
     rm -rf /var/lib/apt/lists/*
+
+FROM ubuntu-kicad-nightly
+
+COPY *.sh /usr/bin/
+
+RUN chmod +rx /usr/bin/render-pcb.sh && chmod +rx /usr/bin/kicad_animation.sh
+
+WORKDIR /pwd
