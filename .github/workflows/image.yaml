@@ -77,6 +77,25 @@ jobs:
       - name: render with animation- test file created
         run: test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
       
+      - name: render pcb image
+        uses: linalinn/kicad-render@${{ github.sha }}
+        with:
+          docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
+          pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
+          output_path: /pwd/images/action
+          background: transparent
+          zoom: 0.5
+          animation: "gif"
+          kicad_cli_options: " --respective"
+
+      - name: render pcb image
+        uses: linalinn/kicad-render@${{ github.sha }}
+        with:
+          docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
+          pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
+          output_path: /pwd/images/action
+          pre_render: "/pwd/.github/tests/test pcb/kicad_render_pre_render.sh"
+      
       - name: Archive test renders
         if: always()
         uses: actions/upload-artifact@v4
