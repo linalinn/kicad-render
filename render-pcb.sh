@@ -80,7 +80,6 @@ echo "$output_path"
 
 mkdir -p "$output_path"
 
-KICAD_CLI_OPTIONAL_ARGS=""
 
 if [[ -n "$zoom" ]]; then
     KICAD_CLI_OPTIONAL_ARGS="$KICAD_CLI_OPTIONAL_ARGS --zoom $zoom"
