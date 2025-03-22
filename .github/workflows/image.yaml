@@ -78,7 +78,7 @@ jobs:
         run: test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
       
       - name: render pcb image
-        uses: linalinn/kicad-render@${{ github.sha }}
+        uses: linalinn/kicad-render@$GITHUB_SHA
         with:
           docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
           pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
@@ -89,7 +89,7 @@ jobs:
           kicad_cli_options: " --respective"
 
       - name: render pcb image
-        uses: linalinn/kicad-render@${{ github.sha }}
+        uses: linalinn/kicad-render@$GITHUB_SHA
         with:
           docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
           pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
