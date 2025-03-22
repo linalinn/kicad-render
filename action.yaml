@@ -27,11 +27,9 @@ inputs:
   kicad_cli_options:
     description: 'Add varios cli options that are not exposed by the action'
     required: false
-  docker_image:
-    default: 'docker://ghcr.io/linalinn/kicad-render:9.0'
 runs:
   using: 'docker'
-  image: ${{ inputs.docker_image }}
+  image: docker://ghcr.io/linalinn/kicad-render:9.0
   args:
     - bash
     - -c 
