@@ -1,5 +1,6 @@
 name: build kicad-render image
 on:
+  workflow_dispatch:
   push:
     paths:
     - Dockerfile
