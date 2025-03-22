@@ -31,7 +31,7 @@ inputs:
     default: 'docker://ghcr.io/linalinn/kicad-render:9.0'
 runs:
   using: 'docker'
-  image: '${{ inputs.docker_image }}'
+  image: ${{ inputs.docker_image }}
   args:
     - bash
     - -c 
