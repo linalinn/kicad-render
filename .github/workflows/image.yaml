@@ -76,9 +76,12 @@ jobs:
         run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"  -o "/pwd/images" -a "gif" 
       - name: render with animation- test file created
         run: test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
+
+      - name: list files
+        run: ls -al
       
       - name: render pcb image
-        uses: ./action.yaml
+        uses: ./
         with:
           docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
           pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
