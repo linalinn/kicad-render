@@ -79,12 +79,11 @@ jobs:
         run: test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
 
       - name: list files
-        run: ls -al
+        run: sed -i 's#ghcr.io/linalinn/kicad-render.*$#ghcr.io/linalinn/kicad-render:${{ github.ref_name }}#g' ${GITHUB_WORKSPACE}/action.yaml && cat ${GITHUB_WORKSPACE}/action.yaml 
       
       - name: render pcb image
         uses: ./
         with:
-          docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
           pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
           output_path: /pwd/images/action
           background: transparent
@@ -95,7 +94,6 @@ jobs:
       - name: render pcb image
         uses: ./
         with:
-          docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
           pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
           output_path: /pwd/images/action
           pre_render: "/pwd/.github/tests/test pcb/kicad_render_pre_render.sh"
