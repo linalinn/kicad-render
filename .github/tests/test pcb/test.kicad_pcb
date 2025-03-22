@@ -737,12 +737,13 @@
 			(justify left bottom mirror)
 		)
 	)
-	(gr_text "Front"
+	(gr_text "Front ███"
 		(at 177.5 98 0)
 		(layer "F.SilkS")
 		(uuid "28577b04-fc35-4189-a192-10eba91eead3")
 		(effects
 			(font
+			    (face "Arial")
 				(size 1 1)
 				(thickness 0.1)
 			)
