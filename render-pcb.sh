@@ -87,12 +87,12 @@ fi
 
 echo "rendering top"
 # This is somewhat smart but also cursed
-RENDER_TOP="$KICAD_CLI pcb render --side top --background $background -o \"$output_top\" \"$kicad_pcb\" $KICAD_CLI_OPTIONAL_ARGS"
+RENDER_TOP="$KICAD_CLI pcb render --side top --background $background -o \"$output_top\" -f \"$kicad_pcb\" $KICAD_CLI_OPTIONAL_ARGS"
 echo $RENDER_TOP
 eval $RENDER_TOP
 echo "rendering bottom"
 # This is somewhat smart but also cursed
-RENDER_BOTTOM="$KICAD_CLI pcb render --side bottom --background $background -o "$output_bottom" "$kicad_pcb" $KICAD_CLI_OPTIONAL_ARGS"
+RENDER_BOTTOM="$KICAD_CLI pcb render --side bottom --background $background -o \"$output_bottom\" -f \"$kicad_pcb\" $KICAD_CLI_OPTIONAL_ARGS"
 echo $RENDER_TOP
 eval $RENDER_TOP
 
