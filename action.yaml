@@ -34,20 +34,16 @@ runs:
     - bash
     - -c 
     - if [ -n "$INPUT_PRE_RENDER" ]; 
-      then source "${INPUT_PRE_RENDER}";fi;
-      if [ -n "$INPUT_PREFIX" ];
-      then export PREFIX_OPTION=$(echo " -p \"$INPUT_PREFIX\" "); echo $PREFIX_OPTION;fi;
+      then source "${INPUT_PRE_RENDER}";fi; 
       if [ -n "$INPUT_ANIMATION" ]; then 
-      KICAD_CLI_OPTIONAL_ARGS="$INPUT_KICAD_CLI_OPTIONS" render-pcb.sh 
+      KICAD_CLI_OPTIONAL_ARGS="$INPUT_KICAD_CLI_OPTIONS" filename_prefix="$INPUT_PREFIX" render-pcb.sh 
       -f "$INPUT_PCB_FILE" 
       -o "$INPUT_OUTPUT_PATH" 
       -b "$INPUT_BACKGROUND" 
       -z "$INPUT_ZOOM" 
-      $PREFIX_OPTION 
       -a "$INPUT_ANIMATION"; else 
-      KICAD_CLI_OPTIONAL_ARGS="$INPUT_KICAD_CLI_OPTIONS" render-pcb.sh -f "$INPUT_PCB_FILE" 
+      KICAD_CLI_OPTIONAL_ARGS="$INPUT_KICAD_CLI_OPTIONS"  filename_prefix="$INPUT_PREFIX" render-pcb.sh -f "$INPUT_PCB_FILE" 
       -o "$INPUT_OUTPUT_PATH" 
       -b "$INPUT_BACKGROUND" 
-      $PREFIX_OPTION 
       -z "$INPUT_ZOOM"; fi
 
