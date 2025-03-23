@@ -13,6 +13,8 @@ jobs:
   push_to_registry:
     name: Build, Test and Push
     runs-on: ubuntu-latest
+    env:
+      docker_image: ghcr.io/linalinn/kicad-render:${{ github.ref_name }}
 
     permissions:
       packages: write
@@ -44,43 +46,43 @@ jobs:
           file: ./Dockerfile
           build-args: |
             "VERSION=${{ github.sha }}"
-          cache-to: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
+          cache-to: "type=registry,ref=${{ env.docker_image }}"
           cache-from: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
           load: true
-          tags: "ghcr.io/linalinn/kicad-render:${{ github.ref_name }}"
+          tags: "${{ env.docker_image }}"
 
       - name: simple render
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ${{ env.docker_image }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"
       - name: simple render - test file created
         run: test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/test_top.png"
 
       - name: simple render with output path
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images"
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ${{ env.docker_image }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images"
       - name: simple render with output path - test file created
         run: test -s "${GITHUB_WORKSPACE}/images/top.png"
 
       - name: simple render with filename prefix
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -p fp 
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ${{ env.docker_image }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -p fp 
       - name: simple render with filename prefix - test file created
         run: test -s "${GITHUB_WORKSPACE}/.github/tests/test pcb/fp_top.png"
 
       - name: simple render with output path and filename prefix
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }}  render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -p fp
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ${{ env.docker_image }}  render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -p fp
       - name: simple render with output path and filename prefix - test file created
         run: test -s "${GITHUB_WORKSPACE}/images/fp_top.png"
 
       - name: simple render with zoom
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -z "0.5" 
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ${{ env.docker_image }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb" -o "/pwd/images" -z "0.5" 
       - name: simple render with zoom - test file created
         run: test -s "${GITHUB_WORKSPACE}/images/top.png"
 
       - name: render with animation
-        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ghcr.io/linalinn/kicad-render:${{ github.ref_name }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"  -o "/pwd/images" -a "gif" 
+        run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ${{ env.docker_image }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"  -o "/pwd/images" -a "gif" 
       - name: render with animation- test file created
         run: test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
 
       - name: replace docker image with branch image
-        run: sed -i 's#ghcr.io/linalinn/kicad-render.*$#ghcr.io/linalinn/kicad-render:${{ github.ref_name }}#g' ${GITHUB_WORKSPACE}/action.yaml && cat ${GITHUB_WORKSPACE}/action.yaml 
+        run: sed -i 's#ghcr.io/linalinn/kicad-render.*$#${{ env.docker_image }}#g' ${GITHUB_WORKSPACE}/action.yaml && cat ${GITHUB_WORKSPACE}/action.yaml 
 
       - name: render pcb image with pre_render script
         uses: ./
@@ -109,15 +111,15 @@ jobs:
       - name: push docker image dev
         if: github.ref_name != github.event.repository.default_branch
         run: |
-          docker tag ghcr.io/linalinn/kicad-render:${{ github.ref_name }} ghcr.io/linalinn/kicad-render:9.0-dev-${{ github.ref_name }}
-          docker tag ghcr.io/linalinn/kicad-render:${{ github.ref_name }} ghcr.io/linalinn/kicad-render:9.0-dev-${{ steps.date.outputs.date }}
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9.0-dev-${{ github.ref_name }}
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9.0-dev-${{ steps.date.outputs.date }}
           docker push ghcr.io/linalinn/kicad-render:9.0-dev-${{ github.ref_name }}
           docker push ghcr.io/linalinn/kicad-render:9.0-dev-${{ steps.date.outputs.date }}
 
       - name: push docker image
         if: github.ref_name == github.event.repository.default_branch
         run: |
-          docker tag ghcr.io/linalinn/kicad-render:${{ github.ref_name }} ghcr.io/linalinn/kicad-render:9.0
-          docker tag ghcr.io/linalinn/kicad-render:${{ github.ref_name }} ghcr.io/linalinn/kicad-render:9.0-${{ steps.date.outputs.date }}
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9.0
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9.0-${{ steps.date.outputs.date }}
           docker push ghcr.io/linalinn/kicad-render:9.0
           docker push ghcr.io/linalinn/kicad-render:9.0-${{ steps.date.outputs.date }}
