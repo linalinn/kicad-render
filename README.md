@@ -57,7 +57,7 @@ This action allows you to automatically render Images of your PCB and use them e
             uses: actions/deploy-pages@v2
     ```
 
-4. Adding the images to an README.md (feel free to remove the last line)
+4. Adding the images to an README.md
     ```Markdown
     # My first PCB with automatic image generation
 

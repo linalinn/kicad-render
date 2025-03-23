@@ -5,14 +5,19 @@ on:
   workflow_dispatch:
   push:
     paths:
-    - Dockerfile
+    - Dockerfile.kicad-nightly
     - .github/workflows/kicad-nightly.yaml
+    - action.yaml
+    - '*.sh'
+
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     env:
       docker_image: ghcr.io/linalinn/kicad-render:nightly-${{ github.ref_name }}
+      docker_image_cache: ghcr.io/linalinn/kicad-render:cache-nightly-${{ github.ref_name }}
+      docker_file: ./Dockerfile.kicad-nightly
 
     permissions:
       packages: write
@@ -39,14 +44,14 @@ jobs:
         if: github.ref_name != github.event.repository.default_branch
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile.kicad-nightly
+          context: ${{ env.docker_file }}
+          file: 
           build-args: |
             "VERSION=${{ github.sha }}"
-          cache-to: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
-          cache-from: "type=registry,ref=ghcr.io/linalinn/kicad-render:cache-${{ github.ref_name }}"
+          cache-to: "type=registry,ref=${{ env.docker_image_cache }}"
+          cache-from: "type=registry,ref=${{ env.docker_image_cache }}"
           load: true
-          tags: "ghcr.io/linalinn/kicad-render:nightly-${{ github.ref_name }}"
+          tags: "${{ env.docker_image }}"
 
       - name: simple render
         run: docker run -v ${GITHUB_WORKSPACE}:/pwd --rm ${{ env.docker_image }} render-pcb.sh -f "/pwd/.github/tests/test pcb/test.kicad_pcb"
@@ -81,14 +86,17 @@ jobs:
       - name: replace docker image with branch image
         run: sed -i 's#ghcr.io/linalinn/kicad-render.*$#${{ env.docker_image }}#g' ${GITHUB_WORKSPACE}/action.yaml && cat ${GITHUB_WORKSPACE}/action.yaml 
 
-      - name: render pcb image with pre_render script
+      - name: INT-TEST render pcb image with pre_render script
         uses: ./
         with:
           pcb_file: "${{ github.workspace }}/.github/tests/test pcb/test.kicad_pcb"
           output_path: ${{ github.workspace }}/images/action
           pre_render: "${{ github.workspace }}/.github/tests/test pcb/kicad_render_pre_render.sh"
 
-      - name: render pcb image
+      - name: check INT-TEST render pcb image with pre_render script
+        run: test -s "${GITHUB_WORKSPACE}/images/action/prefix-via pre-render_top.png"
+
+      - name: INT-TEST render pcb image
         uses: ./
         with:
           pcb_file: "${{ github.workspace }}/.github/tests/test pcb/test.kicad_pcb"
@@ -98,6 +106,9 @@ jobs:
           animation: "gif"
           kicad_cli_options: " --perspective"
 
+      - name: check INT-TEST render pcb image
+        run: test -s "${GITHUB_WORKSPACE}/images/action/rotating.gif"
+      
       - name: Archive test renders
         if: always()
         uses: actions/upload-artifact@v4
