@@ -45,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: 
+          file: ${{ env.docker_file }}
           build-args: |
             "VERSION=${{ github.sha }}"
           cache-to: "type=registry,ref=${{ env.docker_image_cache }}"
@@ -121,8 +121,8 @@ jobs:
         run: |
           docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9-dev-${{ github.ref_name }}
           docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9-dev-${{ steps.date.outputs.date }}
-          docker push ghcr.io/linalinn/kicad-render:9.0-dev-${{ github.ref_name }}
-          docker push ghcr.io/linalinn/kicad-render:9.0-dev-${{ steps.date.outputs.date }}
+          docker push ghcr.io/linalinn/kicad-render:9-dev-${{ github.ref_name }}
+          docker push ghcr.io/linalinn/kicad-render:9-dev-${{ steps.date.outputs.date }}
 
       - name: push docker image
         if: github.ref_name == github.event.repository.default_branch
