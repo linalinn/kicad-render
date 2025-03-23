@@ -86,15 +86,9 @@ if [[ -n "$zoom" ]]; then
 fi
 
 echo "rendering top"
-# This is somewhat smart but also cursed
-RENDER_TOP="$KICAD_CLI pcb render --side top --background $background -o \"$output_top\" $KICAD_CLI_OPTIONAL_ARGS \"$kicad_pcb\""
-echo $RENDER_TOP
-eval $RENDER_TOP
+$KICAD_CLI pcb render --side top --background $background -o "$output_top" $KICAD_CLI_OPTIONAL_ARGS "$kicad_pcb"
 echo "rendering bottom"
-# This is somewhat smart but also cursed
-RENDER_BOTTOM="$KICAD_CLI pcb render --side bottom --background $background -o \"$output_bottom\" $KICAD_CLI_OPTIONAL_ARGS \"$kicad_pcb\""
-echo $RENDER_TOP
-eval $RENDER_TOP
+$KICAD_CLI pcb render --side bottom --background $background -o "$output_bottom" $KICAD_CLI_OPTIONAL_ARGS "$kicad_pcb"
 
 if [[ -n "$animation" ]]; then
     echo "rendering animation"
