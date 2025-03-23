@@ -731,6 +731,7 @@
 		(uuid "681b5fcc-ff7f-4a2d-9c82-636542d6bfc1")
 		(effects
 			(font
+				(face "Arial Black")
 				(size 1 1)
 				(thickness 0.1)
 			)
@@ -743,7 +744,7 @@
 		(uuid "28577b04-fc35-4189-a192-10eba91eead3")
 		(effects
 			(font
-			    (face "Arial")
+			    (face "Comic Sans MS")
 				(size 1 1)
 				(thickness 0.1)
 			)
