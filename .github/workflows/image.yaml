@@ -79,10 +79,10 @@ jobs:
       - name: render with animation- test file created
         run: test -s "${GITHUB_WORKSPACE}/images/rotating.gif"
 
-      - name: list files
+      - name: replace docker image with branch image
         run: sed -i 's#ghcr.io/linalinn/kicad-render.*$#ghcr.io/linalinn/kicad-render:${{ github.ref_name }}#g' ${GITHUB_WORKSPACE}/action.yaml && cat ${GITHUB_WORKSPACE}/action.yaml 
 
-      - name: render pcb image
+      - name: render pcb image with pre_render script
         uses: ./
         with:
           pcb_file: "${{ github.workspace }}/.github/tests/test pcb/test.kicad_pcb"
@@ -104,7 +104,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-renders
-          path: ${GITHUB_WORKSPACE}
+          path: ${{ github.workspace }}/images
 
       - name: push docker image dev
         if: github.ref_name != github.event.repository.default_branch
