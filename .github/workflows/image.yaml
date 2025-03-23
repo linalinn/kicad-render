@@ -6,6 +6,7 @@ on:
     - Dockerfile
     - '*.sh'
     - .github/workflows/image.yaml
+    - action.yaml
 
 jobs:
 
