@@ -7,8 +7,9 @@ ls -al $(dirname "$INPUT_PCB_FILE")
 
 echo "# INSTALLING MS FONTS"
 echo "#"
+apt-get update --yes 
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
-apt-get install ttf-mscorefonts-installer
+apt-get install --yes ttf-mscorefonts-installer
 
 KICAD_CLI_OPTIONAL_ARGS="$KICAD_CLI_OPTIONAL_ARGS -zoom 2"
 
