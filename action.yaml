@@ -33,7 +33,7 @@ runs:
   args:
     - bash
     - -c 
-    - if [ -n "$INPUT_PRE_RENDER" ]; 
+    - echo $PWD; env; ls -al; echo $INPUT_PRE_RENDER if [ -n "$INPUT_PRE_RENDER" ]; 
       then source "${INPUT_PRE_RENDER}";fi;
       if [ -n "$INPUT_PREFIX" ];
       then export PREFIX_OPTION=" -p $INPUT_PREFIX ";fi;
