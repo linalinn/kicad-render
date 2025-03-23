@@ -80,7 +80,14 @@ jobs:
 
       - name: list files
         run: sed -i 's#ghcr.io/linalinn/kicad-render.*$#ghcr.io/linalinn/kicad-render:${{ github.ref_name }}#g' ${GITHUB_WORKSPACE}/action.yaml && cat ${GITHUB_WORKSPACE}/action.yaml 
-      
+
+      - name: render pcb image
+        uses: ./
+        with:
+          pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
+          output_path: /pwd/images/action
+          pre_render: "/pwd/.github/tests/test pcb/kicad_render_pre_render.sh"
+
       - name: render pcb image
         uses: ./
         with:
@@ -90,13 +97,6 @@ jobs:
           zoom: 0.5
           animation: "gif"
           kicad_cli_options: " --perspective"
-
-      - name: render pcb image
-        uses: ./
-        with:
-          pcb_file: "/pwd/.github/tests/test pcb/test.kicad_pcb"
-          output_path: /pwd/images/action
-          pre_render: "/pwd/.github/tests/test pcb/kicad_render_pre_render.sh"
       
       - name: Archive test renders
         if: always()
