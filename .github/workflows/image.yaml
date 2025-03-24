@@ -42,7 +42,6 @@ jobs:
         run:  echo "date=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image dev
-        if: github.ref_name != github.event.repository.default_branch
         uses: docker/build-push-action@v5
         with:
           context: .
