@@ -97,6 +97,29 @@ To display the animation in a `README.md` add the following to you README.md.
 ### Example
 You can find a example [here in the m2sdr](https://github.com/HackModsOrg/m2sdr) and the workflow for it [here](https://github.com/HackModsOrg/m2sdr/blob/master/.github/workflows/images.yaml)
 
+## pre render hook / installing fonts
+By setting `pre_render` to a path with a sourceable bash script you can run commands the are getting executed before the Images are rendered. You also can set optional inputs for the action as variables in this file by prefixing the option with `INPUT_` and the option in capslock e.g. `background` becomes `INPUT_BACKGROUND`.
+
+### Example for ms font
+```bash
+apt-get update --yes 
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+apt-get install --yes ttf-mscorefonts-installer
+```
+
+### Example for configureing the Action via pre render hook
+
+```bash
+KICAD_CLI_OPTIONAL_ARGS=" --quality high"
+KICAD_CLI_OPTIONAL_ARGS="$KICAD_CLI_OPTIONAL_ARGS -w 2000" 
+KICAD_CLI_OPTIONAL_ARGS="$KICAD_CLI_OPTIONAL_ARGS -h 2500"
+KICAD_CLI_OPTIONAL_ARGS="$KICAD_CLI_OPTIONAL_ARGS --zoom 2"
+
+export KICAD_CLI_OPTIONAL_ARGS="$KICAD_CLI_OPTIONAL_ARGS"
+export INPUT_PREFIX="prefix-via pre-render"
+```
+
+
 ## Animation original code
 The [code](https://gist.github.com/arturo182/57ab066e6a4a36ee22979063e4d5cce1) for the Animation is from [arturo182](https://github.com/arturo182)  
 [Mastdon post with Gif and link to gist](https://mastodon.social/@arturo182/112062074668232493)
