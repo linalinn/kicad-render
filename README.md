@@ -30,11 +30,11 @@ This action allows you to automatically render Images of your PCB and use them e
             
           - name: Setup Pages
             if: github.ref == 'refs/heads/main'
-            uses: actions/configure-pages@v3
+            uses: actions/configure-pages@v5
 
           - name: Upload Artifact
             if: github.ref == 'refs/heads/main'
-            uses: actions/upload-pages-artifact@v1
+            uses: actions/upload-pages-artifact@v3
             with:
               path: "images"
 
@@ -54,7 +54,7 @@ This action allows you to automatically render Images of your PCB and use them e
         steps:
           - name: Deploy to GitHub Pages
             id: deployment
-            uses: actions/deploy-pages@v2
+            uses: actions/deploy-pages@v4
     ```
 
 4. Adding the images to an README.md
