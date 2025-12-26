@@ -3,17 +3,17 @@
 set -e
 
 help() {
-    echo "Convert .kicad_pcb file to front and back image and optionaly render an animation"
+    echo "Convert .kicad_pcb file to front and back image and optionally render an animation"
     echo
     echo "Syntax: render-pcb.sh [-f|o|a|h]"
     echo "options:"
     echo "f     Path to .kicad_pcb file"
     echo "b     Image background. Options: transparent, opaque. Default: opaque for JPEG, transparent for PNG"
-    echo "o     Directory where the images and optinally the animation should be written to."
-    echo "p     Set a prefix for the images diffrent from project name"
+    echo "o     Directory where the images and optionally the animation should be written to."
+    echo "p     Set a prefix for the images different from project name"
     echo "a     Render animation and select animation output format (mp4 or gif)."
     echo "z     Camera zoom default 1"
-    echo "v     Print protgram version"
+    echo "v     Print program version"
     echo "h     Print this Help."
     echo
     exit
