@@ -30,6 +30,7 @@ inputs:
 runs:
   using: 'docker'
   image: docker://ghcr.io/linalinn/kicad-render:10
+  args:
     - bash
     - -c 
     - if [ -n "$INPUT_PRE_RENDER" ]; 
