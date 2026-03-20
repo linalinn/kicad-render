@@ -8,8 +8,6 @@ ARG KICAD_PPA=kicad/kicad-10.0-releases
 
 ARG KICAD_PACKAGE=kicad
 
-ENV VERSION=$VERSION
-
 RUN apt-get update -y && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:${KICAD_PPA} && \
@@ -23,3 +21,4 @@ COPY *.sh /usr/bin/
 RUN chmod +rx /usr/bin/render-pcb.sh && chmod +rx /usr/bin/kicad_animation.sh
 
 WORKDIR /pwd
+ENV VERSION=$VERSION
