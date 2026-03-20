@@ -1,10 +1,10 @@
-FROM ubuntu:24.04 as ubuntu-kicad
+FROM ubuntu:25.04 as ubuntu-kicad
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 ARG VERSION=no-version
 
-ARG KICAD_PPA=kicad/kicad-9.0-releases
+ARG KICAD_PPA=kicad/kicad-10.0-releases
 
 ARG KICAD_PACKAGE=kicad
 
