@@ -119,8 +119,9 @@ jobs:
       - name: push docker image dev
         if: github.ref_name != github.event.repository.default_branch
         run: |
-          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9-dev-${{ github.ref_name }}
-          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9-dev-${{ steps.date.outputs.date }}
+          export kicad_version_major=$( docker run ${{ env.docker_image }} kicad-cli --version | cut -d '.' -f1 )
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:$kicad_version_major-dev-${{ github.ref_name }}
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:$kicad_version_major-dev-${{ steps.date.outputs.date }}
           docker push ghcr.io/linalinn/kicad-render:9-dev-${{ github.ref_name }}
           docker push ghcr.io/linalinn/kicad-render:9-dev-${{ steps.date.outputs.date }}
 
@@ -128,9 +129,10 @@ jobs:
         if: github.ref_name == github.event.repository.default_branch
         run: |
           export kicad_version=$( docker run ${{ env.docker_image }} kicad-cli --version )
-          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9
-          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:9-${{ steps.date.outputs.date }}
+          export kicad_version_major=$( docker run ${{ env.docker_image }} kicad-cli --version | cut -d '.' -f1 )
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:$kicad_version_major
+          docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:$kicad_version_major-${{ steps.date.outputs.date }}
           docker tag ${{ env.docker_image }} ghcr.io/linalinn/kicad-render:$kicad_version  || true
-          docker push ghcr.io/linalinn/kicad-render:9
+          docker push ghcr.io/linalinn/kicad-render:$kicad_version_major
           docker push ghcr.io/linalinn/kicad-render:$kicad_version || true
-          docker push ghcr.io/linalinn/kicad-render:9-${{ steps.date.outputs.date }}
+          docker push ghcr.io/linalinn/kicad-render:$kicad_version_major-${{ steps.date.outputs.date }}
