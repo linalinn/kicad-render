@@ -1,4 +1,4 @@
-FROM ubuntu:25.04 as ubuntu-kicad
+FROM ubuntu:25.10 as ubuntu-kicad
 
 ARG DEBIAN_FRONTEND=noninteractive
 
