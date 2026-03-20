@@ -19,3 +19,5 @@ COPY *.sh /usr/bin/
 RUN chmod +rx /usr/bin/render-pcb.sh && chmod +rx /usr/bin/kicad_animation.sh
 
 WORKDIR /pwd
+ENV VERSION=$VERSION
+
