@@ -1,6 +1,9 @@
 # action.yml
 name: 'kicad render pcb'
 description: 'Render KiCad PCBs top, bottom optionally render and gif or mp4 of the PCB rotating'
+branding:
+  icon: 'aperture'
+  color: 'purple'
 inputs:
   pcb_file:  # id of input
     description: 'Path to your .kicad_pcb'
