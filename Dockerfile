@@ -2,8 +2,6 @@ FROM ubuntu:25.10 as ubuntu-kicad
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG VERSION=no-version
-
 ARG KICAD_PPA=kicad/kicad-10.0-releases
 
 ARG KICAD_PACKAGE=kicad
@@ -21,4 +19,5 @@ COPY *.sh /usr/bin/
 RUN chmod +rx /usr/bin/render-pcb.sh && chmod +rx /usr/bin/kicad_animation.sh
 
 WORKDIR /pwd
+ARG VERSION=no-version
 ENV VERSION=$VERSION
