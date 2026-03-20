@@ -1,4 +1,4 @@
-FROM ubuntu:26.04 as ubuntu-kicad-nightly
+FROM ubuntu:25.10 as ubuntu-kicad-nightly
 
 ARG DEBIAN_FRONTEND=noninteractive
 
