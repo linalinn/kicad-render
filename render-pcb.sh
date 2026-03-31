@@ -58,16 +58,20 @@ if [[ -z "$output_path" ]]; then
     echo "path: $path"
     output_path="$path"
     output_top="${path}${name}_top.png"
+    output_isometric="${path}${name}_isometric.png"
     output_bottom="${path}${name}_bottom.png"
     echo "output_top: $output_top"
+    echo "output_isometric: $output_isometric"
     echo "output_bottom: $output_bottom"
 else
     if [[ -n "$filename_prefix" ]]; then
         output_top="$output_path/${filename_prefix}_top.png"
+        output_isometric="$output_path/${filename_prefix}_isometric.png"
         output_bottom="$output_path/${filename_prefix}_bottom.png"
         output_animation="$output_path"
     else
         output_top="$output_path/top.png"
+        output_isometric="$output_path/isometric.png"
         output_bottom="$output_path/bottom.png"
         output_animation="$output_path"
     fi
@@ -87,6 +91,8 @@ fi
 
 echo "rendering top"
 $KICAD_CLI pcb render --side top --background $background -o "$output_top" $KICAD_CLI_OPTIONAL_ARGS "$kicad_pcb"
+echo "rendering isometric"
+$KICAD_CLI pcb render --floor --rotate '-45,0,45' --background $background -o "$output_isometric" $KICAD_CLI_OPTIONAL_ARGS "$kicad_pcb"
 echo "rendering bottom"
 $KICAD_CLI pcb render --side bottom --background $background -o "$output_bottom" $KICAD_CLI_OPTIONAL_ARGS "$kicad_pcb"
 
